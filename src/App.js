@@ -7,17 +7,10 @@ import searchIcon from './search.svg';
 const App = () => {
 
   const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
   const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}`;
-
-  const movie1 = {
-    "Title": "Batman: The Animated Series",
-    "Year": "1992–1995",
-    "imdbID": "tt0103359",
-    "Type": "series",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BZmVkNDc3YjQtZDMzOS00MTNjLTljNzUtZDhjYWQxMmVlNjE5XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_SX300.jpg"
-}
 
   const searchMovies = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
@@ -32,18 +25,18 @@ const App = () => {
   
   return (
     <div className="app">
-      <h1>MovieLand</h1>
+      <h1>MovieMatrix</h1>
 
       <div className="search">
         <input 
           placeholder="Search for movies"
-          value='Batman'
-          onChange={() => {}}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <img
           src={searchIcon}
           alt='search'
-          onClick={()=>{}}
+          onClick={()=> searchMovies(searchTerm)}
         />
       </div>
 
